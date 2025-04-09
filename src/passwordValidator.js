@@ -8,7 +8,6 @@ function isPasswordValid(password) {
 }
 function getPasswordStrength(password) {
   if (!password || typeof password !== 'string') return 'invalide';
-
   let score = 0;
 
   // Vérification de la longueur
@@ -21,12 +20,12 @@ function getPasswordStrength(password) {
   if (/\d/.test(password)) score++;
 
   // Vérification de la présence de caractères spéciaux
-  if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) score++;
+  if (/[!@#$%^&(),.?":{}|<>]/.test(password)) score++;
 
   // Ajuster la logique de force du mot de passe
-  if (score <= 1) return 'faible'; // Un score de 1 signifie que le mot de passe est vraiment faible
-  if (score === 2 || score === 3) return 'moyen'; // Score de 2 ou 3 est moyen
-  return 'fort'; // Si score = 4, alors il est fort
+  if (score <= 2) return 'faible';    // Score de 0, 1 ou 2 est faible
+  if (score === 3) return 'moyen';    // Score de 3 est moyen
+  return 'fort';                      // Score de 4 est fort
 }
 
 
@@ -52,7 +51,7 @@ function isPasswordBlacklisted(password) {
 }
 
 function containsSpecialChar(password) {
-  return /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  return /[!@#$%^&(),.?":{}|<>]/.test(password);
 }
 
 module.exports = {
